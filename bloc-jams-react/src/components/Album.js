@@ -4,6 +4,7 @@ import albumData from './../data/albums';
 class Album extends Component {
   constructor(props) {
     super(props);
+    console.log(albumData);
 
     const album = albumData.find( album => {
       return album.slug === this.props.match.params.slug
@@ -12,13 +13,14 @@ class Album extends Component {
     this.state = {
       album: album
     };
+    console.log(this.state.album.songs);
   }
 
   render() {
     return (
       <section className="album">
         <section id="album-info">
-          <img id="album-cover-art" src={this.state.album.albumCover} />
+          <img id="album-cover-art" src={this.state.album.albumCover} alt="just a simple design"/>
           <div className="album-details">
             <h1 id="album-title">{this.state.album.title}</h1>
             <h2 className="artist">{this.state.album.artist}</h2>
@@ -32,7 +34,13 @@ class Album extends Component {
             <col id="song-duration-column" />
           </colgroup>
           <tbody>
-
+            {this.state.album.songs.map( (song, index) =>
+              <tr className="songs" key={index}>
+                <td>{index + 1}</td>
+                <td>{song.title}</td>
+                <td>{song.duration}</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </section>
