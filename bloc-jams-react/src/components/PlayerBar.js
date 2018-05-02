@@ -11,7 +11,7 @@ class PlayerBar extends Component {
           <button id="play-pause" onClick={this.props.handleSongClick} >
             <span className={this.props.isPlaying ? 'ion-pause' : 'ion-play'}></span>
           </button>
-          <button id="next">
+          <button id="next" onClick={this.props.handleNextClick} >
             <span className="ion-skip-forward"></span>
           </button>
         </section>
@@ -22,7 +22,7 @@ class PlayerBar extends Component {
         </section>
         <section id="volume-control">
           <div className="icon ion-volume-low"></div>
-          <input type="range" className="seek-bar" value="80" />
+          <input type="range" className="seek-bar" value="0" />
           <div className="icon ion-volume-high"></div>
         </section>
       </section>

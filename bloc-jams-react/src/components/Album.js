@@ -21,7 +21,7 @@ class Album extends Component {
   }
 
   play() {
-    this.audioElement.play();
+    // this.audioElement.play();
     this.setState({ isPlaying: true });
   }
 
@@ -31,6 +31,7 @@ class Album extends Component {
   }
 
   setSong(song) {
+    console.log('set song firing');
     this.audioElement.src = song.audioSrc;
     this.setState({ currentSong: song });
   }
@@ -49,6 +50,18 @@ class Album extends Component {
     const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
     const newIndex = Math.max(0, currentIndex - 1);
     const newSong = this.state.album.songs[newIndex];
+    this.setSong(newSong);
+    this.play();
+  }
+
+  handleNextClick() {
+    const { songs } = this.state.album;
+    const currentIndex = songs.findIndex(song => this.state.currentSong === song);
+    const newIndex = (currentIndex + 1) >= songs.length ? 0 : currentIndex + 1;
+    const newSong = songs[newIndex];
+
+    console.log(currentIndex, newIndex, newSong);
+
     this.setSong(newSong);
     this.play();
   }
@@ -91,6 +104,7 @@ class Album extends Component {
           currentSong={this.state.currentSong}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
+          handleNextClick={() => this.handleNextClick()}
           />
       </section>
     );
