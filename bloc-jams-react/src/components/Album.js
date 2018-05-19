@@ -93,6 +93,17 @@ class Album extends Component {
     this.setState({ currentTime: newTime });
   }
 
+  songClass(song) {
+    if (this.state.currentSong === song) { 
+      if (this.state.isPlaying) { 
+        return 'song playing';
+      } else { 
+        return 'song'; 
+      }
+    }
+    return 'song';
+  }
+
   formatTime(time) {
     return time ? `${Math.floor(time / 60)}:${Number(time % 60 / 100).toFixed(2).substr(2, 3)}` : "-:--";
   }
@@ -116,7 +127,7 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-              <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
+              <tr className={this.songClass(song)} key={index} onClick={() => this.handleSongClick(song)} >
                 <td className="song-actions">
                   <button>
                     <span className="song-number">{index+1}</span>
