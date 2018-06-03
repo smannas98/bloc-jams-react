@@ -12,7 +12,7 @@ class Album extends Component {
 
     this.state = {
       album: album,
-      currentSong: album.songs[0],
+      currentSong: null,
       currentTime: 0,
       duration: album.songs[0].duration,
       isPlaying: false
@@ -42,7 +42,7 @@ class Album extends Component {
   }
 
   play() {
-   this.audioElement.play();
+    this.audioElement.play();
     this.setState({ isPlaying: true });
   }
 
@@ -58,6 +58,9 @@ class Album extends Component {
   }
 
   handleSongClick(song) {
+    if (this.state.currentSong === null){
+      this.setState({currentSong: this.state.album.songs[0]});
+    }
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong) {
       this.pause();
@@ -108,6 +111,19 @@ class Album extends Component {
     return time ? `${Math.floor(time / 60)}:${Number(time % 60 / 100).toFixed(2).substr(2, 3)}` : "-:--";
   }
 
+  getSongIcon(song, index) {
+
+    if (this.state.isPlaying && this.state.currentSong === song) {
+      return (<span className="ion-pause"></span>);
+    } 
+    
+    if (this.state.hovered === index || (!this.state.isPlaying && this.state.currentSong === song)){
+        return (<span className="ion-play"></span>);
+    }
+
+    return (<span className="song-number">{index+1}</span>);
+  }
+
   render() {
     return (
       <section className="album">
@@ -127,12 +143,12 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-              <tr className={this.songClass(song)} key={index} onClick={() => this.handleSongClick(song)} >
+              <tr key={index} onClick={() => this.handleSongClick(song)} >
                 <td className="song-actions">
-                  <button>
-                    <span className="song-number">{index+1}</span>
-                    <span className="ion-play"></span>
-                    <span className="ion-pause"></span>
+                  <button onMouseEnter={() => this.setState({hovered: index})} onMouseLeave={() => this.setState({hovered: null})} >
+                    {
+                      this.getSongIcon(song, index)
+                    }
                   </button>
                 </td>
                 <td>{song.title}</td>
