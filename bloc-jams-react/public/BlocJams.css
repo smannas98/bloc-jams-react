@@ -1,41 +1,42 @@
-.song-number:hover {
-    content: 'Play';
+body {
+  background-color: #7B7D7D;
+}
+.hyper-link {
+  border-style: solid;
+  border-color: black;
+  color: black;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.hyper-link:hover {
+  color: yellow;
+}
+.app-name {
+  border-style: solid;
+  border-color: black;
+  border-radius: 30px;
+  border-width: thick;
+  display: inline-block;
+  padding: 10px;
+  padding-left: 10px;
+  margin: 10px;
+  margin-top: 50px;
 }
 
-tr .ion-play, 
-tr .ion-pause,
-tr:hover .song-number,
-tr.playing .ion-play, 
-tr.playing .song-number,
-tr.paused .ion-pause,
-tr.paused .song-number {
-  display: none;
+.hero-title {
+  border-style: solid;
+  border-color: charcoal;
+  border-width: medium;
+  border-radius: 15px;
+  display: inline-block;
+  padding: 15px;
+  margin-top: 50px;
 }
-
-tr button:focus .song-number {
-    display: none;
-}
-
-tr.playing button:focus .ion-pause {
-    display: block;
-}
-
-tr.playing button:focus .song-number,
-tr.playing button:focus .ion-play {
-  display: none;
-}
-
-tr:hover .ion-play,
-tr.playing .ion-pause,
-tr.paused .ion-play {
-  display: block;
-}
-
-tr button:focus .ion-play {
-    display: block;
- }
-  
-  tr.playing button:focus .song-number,
-  tr.playing button:focus .ion-play {
-    display: none;
+.selling-points {
+  border-style: solid;
+  border-radius: 25px;
+  padding: 15px;
+  display: inline-flex;
+  margin: 10px;
+  margin-top: 50px;
 }
